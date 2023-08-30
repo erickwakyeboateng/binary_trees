@@ -8,7 +8,7 @@
  */
 int check_sub_tree_Left(const binary_tree_t *node, int max)
 {
-	int _left= 0, _right = 0;
+	int left = 0, right = 0;
 
 	if (node == NULL)
 	{
@@ -18,9 +18,9 @@ int check_sub_tree_Left(const binary_tree_t *node, int max)
 	{
 		if (node->n >= max)
 			return (0);
-		_left= check_sub_tree_Left(node->left, max);
-		_right = check_sub_tree_Left(node->_right, max);
-		if (_left== _right && _left== 1)
+		left = check_sub_tree_Left(node->left, max);
+		right = check_sub_tree_Left(node->right, max);
+		if (left == right && left == 1)
 			return (1);
 		return (0);
 	}
@@ -34,7 +34,7 @@ int check_sub_tree_Left(const binary_tree_t *node, int max)
  */
 int check_sub_tree_Right(const binary_tree_t *node, int min)
 {
-	int _left= 0, _right = 0;
+	int left = 0, right = 0;
 
 	if (node == NULL)
 	{
@@ -44,9 +44,9 @@ int check_sub_tree_Right(const binary_tree_t *node, int min)
 	{
 		if (node->n <= min)
 			return (0);
-		_left= check_sub_tree_Right(node->left, min);
-		_right = check_sub_tree_Right(node->_right, min);
-		if (_left== _right && _left== 1)
+		left = check_sub_tree_Right(node->left, min);
+		right = check_sub_tree_Right(node->right, min);
+		if (left == right && left == 1)
 			return (1);
 		return (0);
 	}
@@ -62,31 +62,31 @@ int check_sub_tree_Right(const binary_tree_t *node, int min)
  */
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
-	int _var = 0, _left= 2, _right = 2;
+	int var = 0, left = 2, right = 2;
 
 	if (tree == NULL)
 		return (0);
-	if (tree->_left&& tree->left->n > tree->n)
+	if (tree->left && tree->left->n > tree->n)
 		return (0);
-	if (tree->_right && tree->_right->n < tree->n)
+	if (tree->right && tree->right->n < tree->n)
 		return (0);
-	if (tree->_left&& tree->left->n < tree->n)
+	if (tree->left && tree->left->n < tree->n)
 	{
-		_var = check_sub_tree_Left(tree->left, tree->n);
-		if (_var == 0)
+		var = check_sub_tree_Left(tree->left, tree->n);
+		if (var == 0)
 			return (0);
-		_left= binary_tree_is_bst(tree->left);
+		left = binary_tree_is_bst(tree->left);
 	}
-	if (tree->_right && tree->_right->n > tree->n)
+	if (tree->right && tree->right->n > tree->n)
 	{
-		_var = check_sub_tree_Right(tree->_right, tree->n);
-		if (_var == 0)
+		var = check_sub_tree_Right(tree->right, tree->n);
+		if (var == 0)
 			return (0);
-		_right = binary_tree_is_bst(tree->_right);
+		right = binary_tree_is_bst(tree->right);
 	}
-	if (_left!= 2 || _right != 2)
+	if (left != 2 || right != 2)
 	{
-		if (_left== 0 || _right == 0)
+		if (left == 0 || right == 0)
 			return (0);
 	}
 	return (1);
