@@ -6,17 +6,17 @@
  */
 link_t *new_node(binary_tree_t *node)
 {
-	link_t *new;
+	link_t *new_;
 
-	new =  malloc(sizeof(link_t));
-	if (new == NULL)
+	new_ =  malloc(sizeof(link_t));
+	if (new_ == NULL)
 	{
 		return (NULL);
 	}
-	new->node = node;
-	new->next = NULL;
+	new_->node = node;
+	new_->next = NULL;
 
-	return (new);
+	return (new_);
 }
 /**
  * free_q - Function that free the nodes at the linked list
@@ -24,13 +24,13 @@ link_t *new_node(binary_tree_t *node)
  */
 void free_q(link_t *head)
 {
-	link_t *temp_node;
+	link_t *_tempnode;
 
 	while (head)
 	{
-		temp_node = head->next;
+		_tempnode = head->next;
 		free(head);
-		head = temp_node;
+		head = _tempnode;
 	}
 }
 /**
@@ -41,16 +41,16 @@ void free_q(link_t *head)
  */
 void _push(binary_tree_t *node, link_t *head, link_t **tail)
 {
-	link_t *new;
+	link_t *new_;
 
-	new = new_node(node);
-	if (new == NULL)
+	new_ = new_node(node);
+	if (new_ == NULL)
 	{
 		free_q(head);
 		exit(1);
 	}
-	(*tail)->next = new;
-	*tail = new;
+	(*tail)->next = new_;
+	*tail = new_;
 }
 /**
  * _pop - Function that pops a node into the stack
@@ -58,11 +58,11 @@ void _push(binary_tree_t *node, link_t *head, link_t **tail)
  */
 void _pop(link_t **head)
 {
-	link_t *temp_node;
+	link_t *_tempnode;
 
-	temp_node = (*head)->next;
+	_tempnode = (*head)->next;
 	free(*head);
-	*head = temp_node;
+	*head = _tempnode;
 }
 /**
  * binary_tree_is_complete - Function that checks if a binary tree is complete
@@ -71,43 +71,43 @@ void _pop(link_t **head)
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	link_t *head, *tail;
+	link_t *_head, *_tail;
 	int flag = 0;
 
 	if (tree == NULL)
 	{
 		return (0);
 	}
-	head = tail = new_node((binary_tree_t *)tree);
-	if (head == NULL)
+	_head = _tail = new_node((binary_tree_t *)tree);
+	if (_head == NULL)
 	{
 		exit(1);
 	}
-	while (head != NULL)
+	while (_head != NULL)
 	{
-		if (head->node->left != NULL)
+		if (_head->node->left != NULL)
 		{
 			if (flag == 1)
 			{
-				free_q(head);
+				free_q(_head);
 				return (0);
 			}
-			_push(head->node->left, head, &tail);
+			_push(_head->node->left, _head, &_tail);
 		}
 		else
 			flag = 1;
-		if (head->node->right != NULL)
+		if (_head->node->right != NULL)
 		{
 			if (flag == 1)
 			{
-				free_q(head);
+				free_q(_head);
 				return (0);
 			}
-			_push(head->node->right, head, &tail);
+			_push(_head->node->right, _head, &_tail);
 		}
 		else
 			flag = 1;
-		_pop(&head);
+		_pop(&_head);
 	}
 	return (1);
 }
