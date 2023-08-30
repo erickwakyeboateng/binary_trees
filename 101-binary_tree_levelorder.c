@@ -6,8 +6,8 @@
  */
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-	size_t l = 0;
-	size_t r = 0;
+	size_t le_ft = 0;
+	size_t ri_ght = 0;
 
 	if (tree == NULL)
 	{
@@ -17,10 +17,10 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	{
 		if (tree)
 		{
-			l = tree->left ? 1 + binary_tree_height(tree->left) : 0;
-			r = tree->right ? 1 + binary_tree_height(tree->right) : 0;
+			le_ft = tree->left ? 1 + binary_tree_height(tree->left) : 0;
+			ri_ght = tree->right ? 1 + binary_tree_height(tree->right) : 0;
 		}
-		return ((l > r) ? l : r);
+		return ((le_ft > ri_ght) ? le_ft : ri_ght);
 	}
 }
 /**
@@ -41,19 +41,19 @@ size_t binary_tree_depth(const binary_tree_t *tree)
  */
 void linked_node(link_t **head, const binary_tree_t *tree, size_t level)
 {
-	link_t *new, *aux;
+	link_t *new_, *aux;
 
-	new = malloc(sizeof(link_t));
-	if (new == NULL)
+	new_ = malloc(sizeof(link_t));
+	if (new_ == NULL)
 	{
 		return;
 	}
-	new->n = level;
-	new->node = tree;
+	new_->n = level;
+	new_->node = tree;
 	if (*head == NULL)
 	{
-		new->next = NULL;
-		*head = new;
+		new_->next = NULL;
+		*head = new_;
 	}
 	else
 	{
@@ -62,8 +62,8 @@ void linked_node(link_t **head, const binary_tree_t *tree, size_t level)
 		{
 			aux = aux->next;
 		}
-		new->next = NULL;
-		aux->next = new;
+		new_->next = NULL;
+		aux->next = new_;
 	}
 }
 /**
