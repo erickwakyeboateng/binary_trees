@@ -40,3 +40,6 @@ typedef struct link_s
 	struct binary_tree_s const *node;
 	struct link_s *next;
 } link_t;
+
+
+void binary_tree_print(const binary_tree_t *);
